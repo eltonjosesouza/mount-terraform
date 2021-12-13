@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Editor } from 'ngx-editor';
-import resources from '../../assets/aws-json/resources.json';
-
+import resources from '../../../assets/aws-json/resources.json';
 
 @Component({
   selector: 'app-resource-select',

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ResourceSelectComponent } from './resource-select/resource-select.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ResourceSelectComponent } from './components/resource-select/resource-select.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
