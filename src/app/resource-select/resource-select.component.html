@@ -1,0 +1,97 @@
+<mat-card class="dashboard-card">
+  <mat-card-title>
+    <h2>Seleção de Recursos</h2>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="row" style="height: 500px">
+      <div class="col-md-6" style="height: 100%; overflow: scroll">
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo de Recurso</mat-label>
+              <input
+                type="text"
+                id="typeResource"
+                placeholder="Selecione um tipo de recurso"
+                matInput
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option
+                  #typeResource
+                  *ngFor="let type of typesResources"
+                  [value]="type"
+                  (onSelectionChange)="
+                    selectResourceBySubcategory(typeResource.value)
+                  "
+                >
+                  {{ type }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" *ngIf="resourcesBySubcategory.length > 0">
+          <div class="col">
+            <mat-form-field appearance="fill">
+              <mat-label>Recurso</mat-label>
+              <input
+                type="text"
+                id="resourceBySubcategory"
+                [value]="resourceBySubcategory"
+                placeholder="Selecione um recurso"
+                matInput
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                  #resourceBySubcategory
+                  *ngFor="let resources of resourcesBySubcategory"
+                  [value]="resources.page_title"
+                  (onSelectionChange)="
+                    selectResource(resourceBySubcategory.value)
+                  "
+                >
+                  {{ resources.page_title }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" *ngIf="selectedResource">
+          <div class="col">
+            <div class="NgxEditor__Wrapper">
+              <md-editor
+                name="Content"
+                [(ngModel)]="exampleResource"
+                [options]="editorOptions"
+                [mode]="editorMode"
+                required
+              >
+              </md-editor>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="saveResource()"
+              [disabled]="!selectedResource"
+            >
+              Adicionar Recurso
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" style="height: 100%; overflow: scroll">
+        <div
+          markdown
+          ngPreserveWhitespaces
+          [data]="selectedResource?.content"
+        ></div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
