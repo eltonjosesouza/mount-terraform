@@ -1,7 +1,7 @@
 export interface IResourceModel {
-  name?: string;
-  content?: string;
-  type?: string;
+  name: string;
+  content: string;
+  type: string;
   path?: string;
 
 }

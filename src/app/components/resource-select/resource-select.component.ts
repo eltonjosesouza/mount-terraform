@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { IResourceModel } from 'src/app/model/resource-model';
+import { ResourceStorageService } from 'src/app/services/resource-storage.service';
 import resources from '../../../assets/aws-json/resources.json';
 
 @Component({
@@ -30,20 +33,14 @@ export class ResourceSelectComponent implements OnInit {
     resizable: false,           // Allow resize the editor
   }
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+    private resourceService: ResourceStorageService, private router: Router) { }
 
 
 
   ngOnInit(): void {
     this.resourcesList = this.resourcesToArray();
     this.typesResources = this.distinctSubCategory(this.resourcesList);
-
-
-
-  }
-
-  onSubmit() {
-    console.log('submit');
   }
 
   resourcesToArray() {
@@ -92,6 +89,13 @@ export class ResourceSelectComponent implements OnInit {
 
   saveResource() {
     console.log("exampleResource", this.exampleResource);
+    let resource: IResourceModel = {
+      name: this.selectedResource.page_title,
+      content: this.exampleResource,
+      type: this.selectedResource.subcategory,
+    }
+    this.resourceService.pushResourceItem(resource);
+    this.router.navigate(['/home']);
   }
 
 

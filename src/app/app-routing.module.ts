@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'home', component: DashboardComponent },
   { path: 'data-source', component: ResourceSelectComponent },
   { path: 'recurso', component: ResourceSelectComponent },
+  { path: 'RefreshComponent', redirectTo: 'recurso' }
 ];
 
 @NgModule({

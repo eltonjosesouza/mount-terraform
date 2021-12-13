@@ -17,6 +17,9 @@ export class ResourceStorageService {
 
   refreshResourceList() {
     this.resourcesList = Object.assign(this.resourcesList, this.localStorage.get(this.RESOURCE_STORAGE));
+    if (this.resourcesList == null) {
+      this.resourcesList = [];
+    }
   }
 
   getResourceList(): IResourceModel[] {

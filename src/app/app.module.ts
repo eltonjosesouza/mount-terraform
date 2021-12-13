@@ -23,15 +23,21 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
-import { NgxEditorModule } from 'ngx-editor';
+
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { ResourceTableComponent } from './components/resource-table/resource-table.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResourceSelectComponent,
     NavBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    ResourceTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +59,13 @@ import { LMarkdownEditorModule } from 'ngx-markdown-editor';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    NgxEditorModule,
     LMarkdownEditorModule,
     FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    NgxDatatableModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
