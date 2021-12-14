@@ -1,0 +1,71 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card class="dashboard-card" >
+        <mat-card-header>
+          <mat-card-title>
+            Rescursos concatenados
+            <button
+              mat-icon-button
+              class="more-button"
+              [matMenuTriggerFor]="menu"
+              aria-label="Toggle menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="clearResourceList()">
+                Limpar
+              </button>
+              <button mat-menu-item (click)="exportTerraformFiles()">
+                Exportar
+              </button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div class="NgxEditor__Wrapper">
+            <md-editor
+              name="Content"
+              [(ngModel)]="exampleResource"
+              [options]="editorOptions"
+              [mode]="editorMode"
+              required
+            >
+            </md-editor>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card class="dashboard-card" style="height: 1000px">
+        <mat-card-header>
+          <mat-card-title>
+            Lista de Rescursos
+            <button
+              mat-icon-button
+              class="more-button"
+              [matMenuTriggerFor]="menu"
+              aria-label="Toggle menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="clearResourceList()">
+                Limpar
+              </button>
+              <button mat-menu-item (click)="exportTerraformFiles()">
+                Exportar
+              </button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <app-resource-table></app-resource-table>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

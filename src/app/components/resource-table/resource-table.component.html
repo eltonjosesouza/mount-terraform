@@ -1,0 +1,87 @@
+<div>
+  <div>
+    <a href="javascript:void(0)" (click)="table.rowDetail.expandAllRows()"
+      >+</a
+    >
+    |
+    <a href="javascript:void(0)" (click)="table.rowDetail.collapseAllRows()"
+      >--</a
+    >
+  </div>
+  <ngx-datatable
+    #myTable
+    class="expandable"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="50"
+    [scrollbarV]="true"
+    [rows]="rows"
+    (page)="onPage($event)"
+    [reorderable]="false"
+  >
+    <!-- Row Detail Template -->
+    <ngx-datatable-row-detail
+      [rowHeight]="330"
+      #myDetailRow
+      (toggle)="onDetailToggle($event)"
+    >
+      <ng-template
+        let-row="row"
+        let-expanded="expanded"
+        ngx-datatable-row-detail-template
+      >
+        <div style="padding-left: 0px;">
+          <!-- <div markdown ngPreserveWhitespaces [data]="row.content"></div> -->
+
+          <div class="NgxEditor__Wrapper">
+            <md-editor
+              name="Content"
+              [(ngModel)]="row.content"
+              [options]="editorOptions"
+              [mode]="editorMode"
+              required
+            >
+              {{ row.content }}
+            </md-editor>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-row-detail>
+    <!-- Column Templates -->
+    <ngx-datatable-column
+      [width]="50"
+      [resizeable]="false"
+      [sortable]="false"
+      [draggable]="false"
+      [canAutoResize]="false"
+    >
+      <ng-template
+        let-row="row"
+        let-expanded="expanded"
+        ngx-datatable-cell-template
+      >
+        <a
+          href="javascript:void(0)"
+          [class.datatable-icon-right]="!expanded"
+          [class.datatable-icon-down]="expanded"
+          title="Expand/Collapse Row"
+          (click)="toggleExpandRow(row)"
+        >
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Tipo" [width]="200">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <strong>{{ row.type }}</strong>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Nome" [width]="200">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <strong>{{ row.name }}</strong>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
