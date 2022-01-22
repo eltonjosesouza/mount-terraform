@@ -91,7 +91,7 @@ class Dashboard {
 
 
 
-Dashboard --> ResourceStorageServiceß
+Dashboard --> ResourceStorageService
 ResourceSelectComponent --> ResourceStorageService
 ResourceStorageService --> IResourceModel
 ResourceStorageService --> LocalStorageService
