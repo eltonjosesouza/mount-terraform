@@ -1,0 +1,102 @@
+@startuml
+
+interface IResourceModel {
+  String name
+  String content
+  String type
+  String path
+}
+
+class ResourceStorageService {
+
+  + constructor(localStorage: LocalStorageService)
+  + refreshResourceList()
+  + getResourceList()
+  - setResource(resource: any)
+  + pushResourceItem(resource: IResourceModel)
+  + clearResourceList()
+  + popResourceItem(resource: IResourceModel)
+  + updateResourceItem(resource: IResourceModel)
+  + getResourceItem(resource: IResourceModel)
+
+
+  - String RESOURCE_STORAGE
+  - IResourceModel[] resourcesList
+
+}
+
+class LocalStorageService {
+  - Storage storage
+  + constructor()
+  + boolean set(key: String, value: any)
+  + String get(key: String)
+  + boolean remove(key: String)
+  + boolean clear()
+}
+
+class ResourceTableComponent {
+  + columns
+  + rows
+  + expanded
+  + timeout
+  + ColumnMode
+  + editorMode
+  + editorOptions
+
+  + constructor(ResourceStorageService resourceService)
+  + getValue(any row)
+  + onPage(any event)
+  + ngOnInit()
+  + toogleExpandRow(any row)
+  + onDetailToggled(any event)
+}
+
+class ResourceSelectComponent {
+  + checkoutForm
+  + any resourcesList
+  + any[] typesResources
+  + any[] resourcesBySubcategory
+  + any selectedResource
+  + String resourceBySubcategory
+  + String exampleResource
+  + String editorMode
+  + editorOptions
+
+  + constructor(FormBuilder formBuilder, ResourceStorageService resourceService, Router router)
+  + ngOnInit()
+  + resourcesToArray()
+  + any[] distinctSubCategory(any[] resourcerArray)
+  + any selectResourceBySubcategory(String subcategory)
+  + selectResource(String resource)
+  + extractTerraformBlock()
+  + saveResource()
+}
+
+class Dashboard {
+
+  + String exampleResource
+  + String editorMode
+  + editorOptions
+
+  + constructor(ResourceStorageService serviceResource , Router router)
+  + ngOnInit()
+  + clearResourceList()
+  + exportTerraformFiles()
+  + getOnlyContentOnResourceList()
+  + String transformMapInString(Any list)
+  + String escapeAllEspecialCharacters(String string)
+  + writeContents(BlobPart content, String fileName, String contentType)
+
+}
+
+
+
+Dashboard --> ResourceStorageServiceß
+ResourceSelectComponent --> ResourceStorageService
+ResourceStorageService --> IResourceModel
+ResourceStorageService --> LocalStorageService
+ResourceTableComponent --> ResourceStorageService
+
+
+
+@enduml
